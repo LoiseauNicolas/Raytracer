@@ -1,3 +1,0 @@
-/home/loiseau/Bureau/Raytracer/CMakeFiles/rebuild_cache.dir
-/home/loiseau/Bureau/Raytracer/CMakeFiles/app/raytLauncher.dir
-/home/loiseau/Bureau/Raytracer/CMakeFiles/edit_cache.dir
