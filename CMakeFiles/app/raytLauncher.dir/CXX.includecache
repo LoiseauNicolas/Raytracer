@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/loiseau/Bureau/Raytracer/app/io_ocv.h
+cstdlib
+-
+iostream
+-
+vector
+-
+opencv2/core/core.hpp
+-
+opencv2/highgui/highgui.hpp
+-
+hdf5.h
+-
+H5hut.h
+-
+physics/particle.h
+/home/loiseau/Bureau/Raytracer/app/physics/particle.h
+utils/pixel.h
+/home/loiseau/Bureau/Raytracer/app/utils/pixel.h
+
+/home/loiseau/Bureau/Raytracer/app/main.cpp
+stdio.h
+-
+io_ocv.h
+/home/loiseau/Bureau/Raytracer/app/io_ocv.h
+pixel.h
+/home/loiseau/Bureau/Raytracer/app/pixel.h
+
+/home/loiseau/Bureau/Raytracer/app/pixel.h
+
