@@ -1,6 +1,4 @@
 class dans include
-  pixel
-  point
   vecteur (like point)
       tableau 3D statique
   ray
@@ -13,3 +11,20 @@ class dans include
 Au début faire des pixel et les afficher avec io_ocv
 0-255 char.
 cmake
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+done :
+	  pixel
+  point

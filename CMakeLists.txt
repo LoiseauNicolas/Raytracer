@@ -1,10 +1,20 @@
-# Nom du projet
-project(Raytracer)
+# version
+cmake_minimum_required(VERSION 3.2)
 
-# Déclaration de l'exécutable
-add_executable(
-    app/raytLauncher
-    app/main.cpp
-    app/io_ocv.h
-    app/pixel.h
-)
+# project name
+project( rayTracer )
+
+# Package required to compilation
+find_package( OpenCV REQUIRED )
+
+# bring headers
+include_directories( include )
+
+
+set(SOURCES app/main.cpp)
+
+file(GLOB SOURCES "app/*.cpp")
+
+
+add_executable( rayTracer ${SOURCES} )
+target_link_libraries( rayTracer ${OpenCV_LIBS} )
