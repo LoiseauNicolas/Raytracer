@@ -7,7 +7,7 @@
 class sphere_t	
 {
 public:
-	double _x,_y,_z;
+	point_t &_origin;
 
 	
 
