@@ -3,6 +3,7 @@
 
 #include "io_ocv.h"
 #include "pixel.h"
+#include "sphere.h"
 
 int main(int argc, char **argv) {
 
@@ -23,6 +24,18 @@ int main(int argc, char **argv) {
 		}
 	}
 
+	sphere_t *s = new sphere_t();
+	// std::cout << s->_origin.getX();
+
 	io::output_window_wait("bonjour.png", image, width, height);
 	io::output_file("bonjour.png", image, width, height);
+
+
+
+// int i=0;
+// int *pi=&i;
+// *pi=*pi+1;   // Manipulation de i via pi.
+// std::cout << i << "   " << *pi << "   " << &i << "   "<<*pi<< "  "<< pi;
+// 1   1   0x7ffeac5852cc   1  0x7ffeac5852cc
+
 }

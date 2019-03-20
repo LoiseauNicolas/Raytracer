@@ -10,19 +10,19 @@ public:
 	double _x,_y,_z;
 
 	// Constructeurs
-	Point() : _x(0),_y(0),_z(0);
-	Point(double x, double y, double z) : _x(x),_y(y),_z(z);
+	point_t() : _x(0),_y(0),_z(0){};
+	point_t(double x, double y, double z) : _x(x),_y(y),_z(z){};
 
 	//getteurs et setteurs
-	void setX(double x){this->_x=x};
-	void setY(double y){this->_y=y};
-	void setZ(double z){this->_z=z};
-	double getX() const { return this->_x};
-	double getY() const { return this->_y};
-	double getZ() const { return this->_z};
+	void setX(double x){this->_x=x;};
+	void setY(double y){this->_y=y;};
+	void setZ(double z){this->_z=z;};
+	double getX() const { return this->_x;};
+	double getY() const { return this->_y;};
+	double getZ() const { return this->_z;};
 
 	// Autres méthodes
-	double distance(const Point_t &P) const
+	double distance(const point_t &P) const
 	{
 		double dx = this->_x - P._x;
 		double dy = this->_y - P._y;

@@ -15,9 +15,11 @@ public:
 
 	ray_t(){};
 
-	ray(const vector_t &dir, const point_t &ori)
-	: _direction(dir), _origin(ori)
-	{};
+	ray_t(const vector_t &dir, const point_t &ori)
+	{
+		_direction = dir;
+		_origin = ori;
+	};
 
 	// setters et getters ? 
 
