@@ -4,10 +4,12 @@
 #include <cmath>
 #include <iostream>
 
-class point_t	
+template <typename T> class point_t	
 {
-public:
+private:
 	double _x,_y,_z;
+public:
+	
 
 	// Constructeurs
 	point_t() : _x(0),_y(0),_z(0){};
