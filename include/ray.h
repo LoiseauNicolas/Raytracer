@@ -10,18 +10,18 @@
 template<typename T> class ray_t	
 {
 private: 
-	vector_t _direction;
-	point_t _origin;
+	vector_t<T> _direction;
+	point_t<T> _origin;
 
 public:
 	ray_t(){};
-	ray_t(const vector_t &dir, const point_t &ori)
+	ray_t(const vector_t<T> &dir, const point_t<T> &ori)
 	{
 		_direction = dir;_origin = ori;
 	};
 
 	// setters et getters ? 
-	point_t getOrigin()
+	point_t<T> getOrigin()
 	{
 		return _origin;
 	}

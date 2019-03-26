@@ -6,40 +6,43 @@
 
 #include "point.h"
 
-class vector_t	
+template <typename T> class vector_t : public array_1x3<T>
 {
 public:
 
 	// http://olivier.buga.free.fr/sandy/bases.html
-	double _x,_y,_z;
+	// double _x,_y,_z;
 
-	vector_t(){};
+	vector_t():array_1x3<T>(){};
 
-	vector_t(const point_t& A, const point_t &B)
-	:_x(B._x-A._x), _y(B._y-A._y), _z(B._z-A._z)
+	vector_t(const point_t<T>& A, const point_t<T>& B)
+	:array_1x3<T>(B[0]-A[0], B[1]-A[1], B[2]-A[2])
 	{};	
 
 	vector_t(const double& a, const double& b, const double& c)
-	:_x(a), _y(b), _z(c)
+	:array_1x3<T>(a, b, c)
 	{};	
 
 
 	double norm()
 	{
-		double ret = this->_x*this->_x + this->_y*this->_y + this->_z*this->_z;
+		double ret = (*this)[0]*(*this)[0] + (*this)[1]*(*this)[1] + (*this)[2	]*(*this)[2];
 		return sqrt(ret);
 	}
 
 	double normalize()
 	{
-		this->_x /= this->norm();
-		this->_y /= this->norm();
-		this->_z /= this->norm();
-	}
-	double dot(const vector_t& vec1 ,const  vector_t& vec2)
-	{
-		return vec1._x*vec2._x+vec1._y*vec2._y+vec1._z*vec2._z;
+		*this /= this->norm();
+		// this->_x /= this->norm();
+		// this->_y /= this->norm();
+		// this->_z /= this->norm();
 	}
 };
+
+template<typename T>
+double dot(const vector_t<T>& vec1 ,const  vector_t<T>& vec2)
+{
+	return vec1[0]*vec2[0]+vec1[1]*vec2[1]+vec1[2]*vec2[2];
+}
 
 #endif
