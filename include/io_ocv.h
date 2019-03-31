@@ -7,7 +7,7 @@
 //               \  $$/$$/ | $$ \____  $$| $$____/ | $$__  $$                 //
 //                \  $$$/  | $$ /$$  \ $$| $$      | $$  | $$                 //
 //                 \  $/   | $$|  $$$$$$/| $$      | $$  | $$                 //
-//                  \_/    |__/ \______/ |__/      |__/  |__/                 // 
+//                  \_/    |__/ \______/ |__/      |__/  |__/                 //
 //                                                                            //
 //*--------------------------------------------------------------------------*//
 
@@ -18,8 +18,7 @@
  * @brief Simple implementation for Input Output for serial and distributed
  */
 
-#ifndef _visph_io_ocv_h_
-#define _visph_io_ocv_h_
+#pragma once
 
 #include <cstdlib>
 #include <iostream>
@@ -41,17 +40,17 @@ namespace io{
 /**
  * @brief      Output data to file
  */
-void 
+void
 output_file(
 	const char * filename,
-	const std::vector<pixel_t>& pixels,
+	std::vector<pixel_t>& pixels,
 	const size_t& width,
 	const size_t& height)
 {
 
 	assert(width*height == pixels.size());
 
-	cv::Mat mat(height,width,CV_8UC3,(char*)&pixels[0]); 
+	cv::Mat mat(height,width,CV_8UC3,(char*)&pixels[0]);
 
 	cv::imwrite( filename, mat );
 	std::cout<<"Outputed: "<<filename<<std::endl;
@@ -59,24 +58,20 @@ output_file(
 /**
  * @brief      Output data to windows
  */
-void 
+void
 output_window_wait(
 	const char * filename,
-	const std::vector<pixel_t>& pixels,
+	std::vector<pixel_t>& pixels,
 	const size_t& width,
 	const size_t& height)
 {
 
 	assert(width*height == pixels.size());
 
-	cv::Mat mat(height,width,CV_8UC3,(char*)&pixels[0]); 
+	cv::Mat mat(height,width,CV_8UC3,(char*)&pixels[0]);
 
 	cv::imshow(filename, mat);
 	cv::waitKey(0);
 }
 
 } // namespace io
-
-#endif // __visph_io_ocv_h__
-
-

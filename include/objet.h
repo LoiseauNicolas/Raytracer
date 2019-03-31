@@ -1,10 +1,7 @@
-#ifndef OBJET_H
-#define OBJET_H
+#pragma once
 
 template <typename T> class objet_t
 {
 public:
-	
-};
 
-#endif
+};
