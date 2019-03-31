@@ -1,8 +1,8 @@
 #pragma once
 
-#include "sphere.h"
+#include "geometry/sphere.h"
 #include "pixel.h"
-#include "point.h"
+#include "geometry/point.h"
 
 template <typename T> class scene_t
 {

@@ -20,4 +20,5 @@ int main(int argc, char **argv) {
 	raytracer rt;
 	rt.render(scene);
 	rt.output("name.png",scene);
+	
 }

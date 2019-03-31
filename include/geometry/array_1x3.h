@@ -9,7 +9,7 @@ private:
 
 public:
 
-	constexpr array_1x3(): _array{0,0,0} {}
+	constexpr array_1x3(): _array{T{},T{},T{}} {}
 
 	constexpr array_1x3(const T &r, const T &g, const T &b): _array{r,g,b}{}
 
@@ -45,7 +45,6 @@ public:
 		_array[2] *= a;
 		return *this;
 	}
-
 
 	array_1x3<T> operator*(const T& value)
 	{

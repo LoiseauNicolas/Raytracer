@@ -1,6 +1,6 @@
 #pragma once
 
-#include "array_1x3.h"
+#include "geometry/array_1x3.h"
 
 class pixel_t : public array_1x3<unsigned char>
 {

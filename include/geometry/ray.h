@@ -3,8 +3,8 @@
 #include <cmath>
 #include <iostream>
 
-#include "point.h"
-#include "vector.h"
+#include "geometry/point.h"
+#include "geometry/vector.h"
 
 template<typename T> class ray_t
 {
@@ -25,6 +25,7 @@ public:
 	vector_t<T> direction() { return _direction;}
 
 	void set_origin(const point_t<T>& origin){ _origin = origin;}
-	void set_direction(const vector_t<T>& direction){ _direction = direction;}
+	void set_direction(const vector_t<T>& direction)
+		{ _direction = direction;}
 
 };

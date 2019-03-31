@@ -3,7 +3,7 @@
 #include <cmath>
 #include <iostream>
 
-#include "point.h"
+#include "geometry/point.h"
 
 template <typename T> class vector_t : public array_1x3<T>
 {
