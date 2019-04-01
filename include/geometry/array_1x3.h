@@ -99,6 +99,14 @@ public:
 		return 1;
 	}
 
+	array_1x3<T> operator+(const array_1x3& p)
+	{
+	    array_1x3 tmp (_array[0] + p[0],
+	                           _array[1] + p[1],
+	                           _array[2] + p[2] );
+	    return tmp;
+	}
+
 };
 
 template<typename T>

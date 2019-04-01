@@ -15,6 +15,7 @@ private:
 
 	point_t<T> _observator;
 
+
 	static constexpr size_t _width_default = 1024;
 	static constexpr size_t _height_default = 768;
 	static const point_t<T> _observator_default;
@@ -36,8 +37,15 @@ public:
 		_objects.emplace_back(O(std::forward<ARGS>(args)...));
 	}
 
+	const std::vector<sphere_t<T>>&
+    get_objects() const
+    {
+        return _objects;
+    }
+
 	size_t width() const {return _width;}
 	size_t height() const {return _height;}
+	point_t<T>& observator() {return _observator;}
 	std::vector<pixel_t>& pixels() {return _pixels;}
 
 };

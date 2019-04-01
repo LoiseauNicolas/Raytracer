@@ -15,7 +15,7 @@ using point = point_t<type_t>;
 int main(int argc, char **argv) {
 
 	scene scene;
-	scene.add_object<sphere>(point{0,0,10},5.0);
+	scene.add_object<sphere>(point{100,0,100},110.0);
 
 	raytracer rt;
 	rt.render(scene);
