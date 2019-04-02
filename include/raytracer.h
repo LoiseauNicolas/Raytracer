@@ -11,16 +11,16 @@ public:
 	template<typename T>
 	void render(scene_t<T>& scene){
 
-    float step_x = (float)scene.height()/(float)scene.height();
-    float step_y = (float)scene.width()/(float)scene.width();
+		 float step_x = (float)scene.height()/(float)scene.height();
+		 float step_y = (float)scene.width()/(float)scene.width();
 
 
 		for(int i=0 ; i<scene.height() ; ++i){
 			for(int j=0; j<scene.width(); ++j){
 
 				float xdir = (j*step_x-scene.width()/2);
-                float ydir = (i*step_y-scene.height()/2);
-                float zdir = 1.;
+				float ydir = (i*step_y-scene.height()/2);
+				float zdir = 1.;
 
 				vector_t<T> direction = vector_t<T>
 					(scene.observator(),
@@ -34,6 +34,38 @@ public:
 				// La transformer de 0-1 vers 0-255
 				scene(i,j) = pixel_t(
 					pixel_color[0]*255, pixel_color[1]*255, pixel_color[2]*255);
+
+
+
+				// Teste d'ajout de lumière
+				// for(auto light: scene.lights()){
+					
+				// 	float xdir = (j*step_x-scene.width()/2);
+				// 	float ydir = (i*step_y-scene.height()/2);
+				// 	float zdir = 1.;
+
+				// 	point_t<T> cont;
+				// 	vector_t<T> dir = vector_t<T>
+				// 		(light.position(),
+				// 		point_t<T>( xdir, ydir, zdir ));
+
+				// 	ray_t<T> ray = ray_t<T>(dir, light.position());
+				// 	int p = 0, index =0;
+				// 	T curr_dist = std::numeric_limits<T>::max();
+				// 	for(auto obj: scene.objects()){
+				// 		if( obj.intersect(ray,cont) ){
+				// 			if(distance(scene.observator(),cont) < curr_dist){
+				// 				index = p;
+				// 			}
+				// 		}
+				// 	}
+				// 	pixel_t tmp = pixel_t(0,0,1.0);
+				// 	if(index != -1)
+				// 		scene(i,j) =pixel_t(
+				// 			tmp[0]*255, tmp[1]*255, tmp[2]*255);
+
+				// }
+
 			}
 		}
 	}
@@ -48,12 +80,12 @@ public:
 
 		for(auto obj: scene.objects()){
 			point_t<T> contact;
-      // Intersect
-      if( obj.intersect(ray,contact) ){
-      	if(distance(scene.observator(),contact) < curr_dist){
+			// Intersect
+			if( obj.intersect(ray,contact) ){
+				if(distance(scene.observator(),contact) < curr_dist){
 					index = i;
-      	}
-      }
+				}
+			}
 			++i;
 		}
 		// TODO retourner la couleur du fond si curr_dist == max

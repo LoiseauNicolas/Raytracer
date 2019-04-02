@@ -3,12 +3,17 @@
 #include "geometry/sphere.h"
 #include "pixel.h"
 #include "geometry/point.h"
+#include "light.h"
 
 template <typename T> class scene_t
 {
+	using light_t = light_u<T>;
+
 private:
 	std::vector<sphere_t<T>> _objects;
 	std::vector<pixel_t> _pixels;
+	std::vector<light_t> _lights;
+
 
 	size_t _width;
 	size_t _height;
@@ -37,7 +42,13 @@ public:
 		_objects.emplace_back(O(std::forward<ARGS>(args)...));
 	}
 
+	template<class L, typename... ARGS>
+	void add_light(ARGS... args){
+		_lights.emplace_back(L(std::forward<ARGS>(args)...));
+	}
+
 	std::vector<sphere_t<T>>& objects() { return _objects; }
+	std::vector<light_t>& lights() { return _lights; }
 
 	size_t width() const {return _width;}
 	size_t height() const {return _height;}
