@@ -17,15 +17,18 @@ private:
 
 	point_t<type_t> _origin;
 	type_t _radius;
-	type_t _color_a; //! Ambiant color
+	point_t<type_t> _color_a; //! Ambiant color
 	type_t _k_s; //! Specular coef
 	type_t _k_d; //! Diff coef
 
 public:
 
 	sphere_t(){};
-	sphere_t(const point_t<type_t> &p, const type_t &rad)
-		:_origin(p), _radius(rad){}
+	sphere_t(
+		const point_t<type_t> &p,
+		const type_t &rad,
+		const point_t<type_t>& color_a)
+		:_origin(p), _radius(rad), _color_a(color_a){}
 
 	bool intersect(ray_t<type_t> &ray, point_t<type_t> &inter)
 	{
@@ -53,5 +56,7 @@ public:
 	}
 
 	void print(){std::cout<<"ok";}
+
+	point_t<type_t> color_a(){return _color_a;}
 
 };

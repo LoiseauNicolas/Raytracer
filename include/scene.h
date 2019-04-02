@@ -16,8 +16,8 @@ private:
 	point_t<T> _observator;
 
 
-	static constexpr size_t _width_default = 1024;
-	static constexpr size_t _height_default = 768;
+	static constexpr size_t _width_default = 800;//1024;
+	static constexpr size_t _height_default = 600;//768;
 	static const point_t<T> _observator_default;
 
 public:
@@ -37,11 +37,7 @@ public:
 		_objects.emplace_back(O(std::forward<ARGS>(args)...));
 	}
 
-	const std::vector<sphere_t<T>>&
-    get_objects() const
-    {
-        return _objects;
-    }
+	std::vector<sphere_t<T>>& objects() { return _objects; }
 
 	size_t width() const {return _width;}
 	size_t height() const {return _height;}
@@ -50,5 +46,13 @@ public:
 
 };
 
+// TODO  La distance de l'observateur est cruciale !
+// Elle represente un objectif d'appareil photo et sa focale.
+// Cours de Pascal Mignot :
+// http://mathinfo.univ-reims.fr/image/siPipeline/Documents/2005-Initiation.pdf
+// Page 18. On peut calculer cette distance en fonction de l'angle
+// d'ouverture
+// Trop proche et les objets sont distordus et trop loin et les objects
+// sur les cotes sont distordus.
 template<typename T>
-const point_t<T> scene_t<T>::_observator_default = point_t<T>{0,0,-5};
+const point_t<T> scene_t<T>::_observator_default = point_t<T>{0,0,-100};
