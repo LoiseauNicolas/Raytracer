@@ -3,7 +3,6 @@
 #include "pixel.h"
 
 class raytracer{
-
 public:
 
 	raytracer(){}
@@ -29,7 +28,7 @@ public:
 				ray_t<T> ray = ray_t<T>(direction, scene.observator());
 
 				// TODO: Retourner une couleur ici
-				point_t<T> pixel_color = launch_ray(ray, scene);
+				color_u<T> pixel_color = launch_ray(ray, scene);
 				// Utiliser la couleur retournee precedemment:
 				// La transformer de 0-1 vers 0-255
 				scene(i,j) = pixel_t(
@@ -72,11 +71,14 @@ public:
 
 
 	template<typename T>
-	static point_t<T> launch_ray(ray_t<T> & ray, scene_t<T>& scene){
+	static color_u<T> launch_ray(ray_t<T> & ray, scene_t<T>& scene){
 
 		T curr_dist = std::numeric_limits<T>::max();
+		// T curr_dist = 0;
 		int index = -1;
 		int i = 0;
+
+		// TODO : Cours mignot ... vecteur prend le pas sur l'autre.
 
 		for(auto obj: scene.objects()){
 			point_t<T> contact;
@@ -84,6 +86,7 @@ public:
 			if( obj.intersect(ray,contact) ){
 				if(distance(scene.observator(),contact) < curr_dist){
 					index = i;
+					curr_dist = distance(scene.observator(),contact);
 				}
 			}
 			++i;
@@ -92,7 +95,8 @@ public:
 		// Autrement retourner la couleur de l'objet:
 		// - Ajouter une couleur de fond dans l'objet scene : rgb entre 0-1
 		if(index == -1)
-			return point_t<T>{0,0,0};
+			return scene.background();
+
 		return scene.objects()[index].color_a();
 	}
 

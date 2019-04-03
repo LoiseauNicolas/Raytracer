@@ -6,18 +6,20 @@
 #include "geometry/point.h"
 #include "geometry/vector.h"
 #include "geometry/ray.h"
+#include "color.h"
 
 template<class T>
 class sphere_t
 {
 
 	using type_t = T;
+	using color_t = color_u<type_t>;
 
 private:
 
 	point_t<type_t> _origin;
 	type_t _radius;
-	point_t<type_t> _color_a; //! Ambiant color
+	color_t _color_a; //! Ambiant color
 	type_t _k_s; //! Specular coef
 	type_t _k_d; //! Diff coef
 
@@ -27,7 +29,7 @@ public:
 	sphere_t(
 		const point_t<type_t> &p,
 		const type_t &rad,
-		const point_t<type_t>& color_a)
+		const color_t& color_a)
 		:_origin(p), _radius(rad), _color_a(color_a){}
 
 	bool intersect(ray_t<type_t> &ray, point_t<type_t> &inter)

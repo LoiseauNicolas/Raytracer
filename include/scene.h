@@ -5,31 +5,34 @@
 #include "pixel.h"
 #include "geometry/point.h"
 #include "light.h"
+#include "color.h"
 
 template <typename T> class scene_t
 {
 	using light_t = light_u<T>;
+	using color_t = color_u<T>;
 
 private:
 	std::vector<sphere_t<T>> _objects;
 	std::vector<pixel_t> _pixels;
 	std::vector<light_t> _lights;
 
-
 	size_t _width;
 	size_t _height;
 
 	point_t<T> _observator;
+	color_t _background;
 
 
 	static constexpr size_t _width_default = 800;//1024;
 	static constexpr size_t _height_default = 600;//768;
 	static const point_t<T> _observator_default;
+	static color_t _backgroung_default;
 
 public:
 
 	scene_t(): _width(_width_default), _height(_height_default),
-		_observator(_observator_default) {
+		_observator(_observator_default), _background(_backgroung_default) {
 		_pixels.resize(_width*_height);
 	};
 
@@ -53,6 +56,8 @@ public:
 
 	size_t width() const {return _width;}
 	size_t height() const {return _height;}
+	color_t background() const {return _background;}
+
 	point_t<T>& observator() {return _observator;}
 	std::vector<pixel_t>& pixels() {return _pixels;}
 
@@ -68,3 +73,6 @@ public:
 // sur les cotes sont distordus.
 template<typename T>
 const point_t<T> scene_t<T>::_observator_default = point_t<T>{0,0,-100};
+
+template<typename T>
+color_u<T> scene_t<T>::_backgroung_default = color_u<T>{0.8,0.8,0.8};
