@@ -1,6 +1,7 @@
 #pragma once
 
 #include "geometry/sphere.h"
+#include "geometry/cylinder.h"
 #include "pixel.h"
 #include "geometry/point.h"
 #include "light.h"

@@ -30,7 +30,7 @@ public:
 		return sqrt(ret);
 	}
 
-	double normalize()
+	void normalize()
 	{
 		*this /= this->norm();
 	}
