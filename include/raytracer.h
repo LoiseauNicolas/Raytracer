@@ -10,27 +10,20 @@ public:
 	template<typename T>
 	void render(scene_t<T>& scene){
 
-		 float step_x = (float)scene.height()/(float)scene.height();
-		 float step_y = (float)scene.width()/(float)scene.width();
-
+		float step_x = (float)scene.height()/(float)scene.height();
+		float step_y = (float)scene.width()/(float)scene.width();
+		// float xdir = (j*step_x-scene.width()/2);
+		// float ydir = (i*step_y-scene.height()/2);
 
 		for(int i=0 ; i<scene.height() ; ++i){
 			for(int j=0; j<scene.width(); ++j){
-				
 
-				float d = 2.0*scene.r() / 600;
+				float delta = 2.0*scene.r() / std::min(scene.height(),
+					scene.width());
 
-				// float xdir = (j*step_x-scene.width()/2);
-				// float ydir = (i*step_y-scene.height()/2);
-
-				// float xdir = (+i+scene.width())*d;
-				// float ydir = (+j+scene.height())*d;
-
-				// float xdir = (i-scene.width()/2)+(j-scene.height())*d;
-				// float ydir = (i-scene.width()/2)+(j-scene.height())*d;
-				float xdir = ((+scene.height()/2) - i)*d;
-				float ydir = ((-scene.width()/2) + j)*d;
-				float zdir = 1.;
+				float xdir = ((+scene.height()/2) - i)*delta;
+				float ydir = ((-scene.width()/2) + j)*delta;
+				float zdir = 0.1;
 
 				vector_t<T> direction = vector_t<T>
 					(scene.observator(),

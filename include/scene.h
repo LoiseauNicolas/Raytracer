@@ -33,7 +33,7 @@ private:
 	static constexpr size_t _height_default = 600;//768;
 	static const point_t<T> _observator_default;
 	static color_t _backgroung_default;
-// 20 *pi /180
+
 public:
 
 	scene_t(): _width(_width_default), _height(_height_default),
@@ -68,7 +68,6 @@ public:
 	std::vector<pixel_t>& pixels() {return _pixels;}
 
 
-	// template<typename t>
     friend std::ostream& operator<<(std::ostream& os, const scene_t<T> &s)
     {
     	os<<"Scene: "<<" W: "<<s._width<<" H: "<<s._height<<" _d: "<<s._d; 
@@ -84,13 +83,6 @@ public:
 // d'ouverture
 // Trop proche et les objets sont distordus et trop loin et les objects
 // sur les cotes sont distordus.
-// template<typename T>
-// std::ostream& operator<<(std::ostream & os, const scene_t<T> &s)
-// {
-//     os<<"Scene: "<<" W: "<<s._width<<" H: "<<s._height<<" _d: "<<s._d; 
-//     return os;
-// }
-
 
 
 template<typename T>
