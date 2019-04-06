@@ -18,19 +18,19 @@ private:
 	std::vector<pixel_t> _pixels;
 	std::vector<light_t> _lights;
 
-	size_t _width;
-	size_t _height;
+	int64_t _width;
+	int64_t _height;
 
 	point_t<T> _observator;
 	color_t _background;
-			
 
-	static constexpr T _phiD = 20;
-	static constexpr T _angle = _phiD*M_PI/180;
-	static constexpr T _r = 2.0;
-	static constexpr T _d = _r/_phiD;
-	static constexpr size_t _width_default = 800;//1024;
-	static constexpr size_t _height_default = 600;//768;
+
+	static constexpr T _phiD = 40;
+	static constexpr T _phiR = _phiD*M_PI/180;
+	static constexpr T _r = 1.0;
+	static constexpr T _d = _r/_phiR;
+	static constexpr int64_t _width_default = 800;//1024;
+	static constexpr int64_t _height_default = 600;//768;
 	static const point_t<T> _observator_default;
 	static color_t _backgroung_default;
 
@@ -60,19 +60,19 @@ public:
 	std::vector<light_t>& lights() { return _lights; }
 
 	T r() const {return _r;}
-	size_t width() const {return _width;}
-	size_t height() const {return _height;}
+	int64_t width() const {return _width;}
+	int64_t height() const {return _height;}
 	color_t background() const {return _background;}
 
 	point_t<T>& observator() {return _observator;}
 	std::vector<pixel_t>& pixels() {return _pixels;}
 
 
-    friend std::ostream& operator<<(std::ostream& os, const scene_t<T> &s)
-    {
-    	os<<"Scene: "<<" W: "<<s._width<<" H: "<<s._height<<" _d: "<<s._d; 
-    	return os;
-    }
+  friend std::ostream& operator<<(std::ostream& os, const scene_t<T> &s){
+  	os<<"Scene: "<<" W: "<<s._width<<" H: "<<s._height<<" _d: "<<s._d;
+		os<<" Phi: "<<_phiR<<" Obs:"<<_observator_default<<std::endl;
+  	return os;
+  }
 };
 
 // TODO  La distance de l'observateur est cruciale !

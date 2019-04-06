@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
 	scene scene;
 	std::cout << scene << std::endl;
 
-	scene.add_object<sphere>(point{0,0,3},0.1,color_t{0.5,0,0});
+	scene.add_object<sphere>(point{0,0,4},1,color_t{1,0,0});
 	// scene.add_object<sphere>(point{0,0,100},110.0,color_t{1.0,0,0});
 	// scene.add_object<sphere>(point{0,10,110},110.0,color_t{0,0.5,0});
 	// scene.add_object<sphere>(point{0,30,120},110.0,color_t{0,1.,0});

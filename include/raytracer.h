@@ -10,24 +10,18 @@ public:
 	template<typename T>
 	void render(scene_t<T>& scene){
 
-		float step_x = (float)scene.height()/(float)scene.height();
-		float step_y = (float)scene.width()/(float)scene.width();
-		// float xdir = (j*step_x-scene.width()/2);
-		// float ydir = (i*step_y-scene.height()/2);
+		const float delta = (2.0*scene.r()) / std::min(scene.height(),
+			scene.width());
 
 		for(int i=0 ; i<scene.height() ; ++i){
 			for(int j=0; j<scene.width(); ++j){
 
-				float delta = 2.0*scene.r() / std::min(scene.height(),
-					scene.width());
+				float xdir = ((-scene.width()/2.) + j)*delta;
+				float ydir = ((scene.height()/2.) - i)*delta;
+				float zdir = 1.;
+				point_t<T> screen_pt = point_t<T>( xdir, ydir, zdir );
 
-				float xdir = ((+scene.height()/2) - i)*delta;
-				float ydir = ((-scene.width()/2) + j)*delta;
-				float zdir = 0.1;
-
-				vector_t<T> direction = vector_t<T>
-					(scene.observator(),
-					point_t<T>( xdir, ydir, zdir ));
+				vector_t<T> direction = vector_t<T>(scene.observator(),screen_pt);
 
 				ray_t<T> ray = ray_t<T>(direction, scene.observator());
 
@@ -42,7 +36,7 @@ public:
 
 				// Teste d'ajout de lumière
 				// for(auto light: scene.lights()){
-					
+
 				// 	float xdir = (j*step_x-scene.width()/2);
 				// 	float ydir = (i*step_y-scene.height()/2);
 				// 	float zdir = 1.;
