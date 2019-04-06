@@ -16,9 +16,20 @@ public:
 
 		for(int i=0 ; i<scene.height() ; ++i){
 			for(int j=0; j<scene.width(); ++j){
+				
 
-				float xdir = (j*step_x-scene.width()/2);
-				float ydir = (i*step_y-scene.height()/2);
+				float d = 2.0*scene.r() / 600;
+
+				// float xdir = (j*step_x-scene.width()/2);
+				// float ydir = (i*step_y-scene.height()/2);
+
+				// float xdir = (+i+scene.width())*d;
+				// float ydir = (+j+scene.height())*d;
+
+				// float xdir = (i-scene.width()/2)+(j-scene.height())*d;
+				// float ydir = (i-scene.width()/2)+(j-scene.height())*d;
+				float xdir = ((+scene.height()/2) - i)*d;
+				float ydir = ((-scene.width()/2) + j)*d;
 				float zdir = 1.;
 
 				vector_t<T> direction = vector_t<T>
@@ -72,6 +83,11 @@ public:
 
 	template<typename T>
 	static color_u<T> launch_ray(ray_t<T> & ray, scene_t<T>& scene){
+
+
+		// float rr = pow(float(scene.width()),2)+pow(float(scene.height()),2);
+		// float r = 0.5 * sqrt( float(rr) );
+		// std::cout << r << " " << 0.5 * sqrt(rr) << std::endl;
 
 		T curr_dist = std::numeric_limits<T>::max();
 		// T curr_dist = 0;
