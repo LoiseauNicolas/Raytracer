@@ -59,6 +59,8 @@ public:
 
 	void print(){std::cout<<"ok";}
 
+	point_t<T> origin() { return _origin;}
+
 	point_t<type_t> color_a(){return _color_a;}
 
 };

@@ -26,7 +26,7 @@ public:
 	{
 		double ret = (*this)[0]*(*this)[0] +
 			(*this)[1]*(*this)[1] +
-			(*this)[2	]*(*this)[2];
+			(*this)[2]*(*this)[2];
 		return sqrt(ret);
 	}
 

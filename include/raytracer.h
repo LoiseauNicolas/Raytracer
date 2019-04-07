@@ -70,16 +70,14 @@ public:
 
 	template<typename T>
 	static color_u<T> launch_ray(ray_t<T> & ray, scene_t<T>& scene){
+		using sphere = sphere_t<T>;
 
-
-		// float rr = pow(float(scene.width()),2)+pow(float(scene.height()),2);
-		// float r = 0.5 * sqrt( float(rr) );
-		// std::cout << r << " " << 0.5 * sqrt(rr) << std::endl;
 
 		T curr_dist = std::numeric_limits<T>::max();
-		// T curr_dist = 0;
-		int index = -1;
-		int i = 0;
+		int index=-1, i=0;
+		sphere closest;
+
+
 
 		// TODO : Cours mignot ... vecteur prend le pas sur l'autre.
 
@@ -90,17 +88,32 @@ public:
 				if(distance(scene.observator(),contact) < curr_dist){
 					index = i;
 					curr_dist = distance(scene.observator(),contact);
+
 				}
 			}
 			++i;
 		}
+		closest = scene.objects()[i];
 		// TODO retourner la couleur du fond si curr_dist == max
 		// Autrement retourner la couleur de l'objet:
 		// - Ajouter une couleur de fond dans l'objet scene : rgb entre 0-1
 		if(index == -1)
 			return scene.background();
+		else{
 
-		return scene.objects()[index].color_a();
+			// N = normal à la surface de l'objet closest au point P
+			// vector_t<T> V = vector_t<T>(scene.lights()[0].position(),
+				// closest.origin());
+
+			
+
+
+
+
+			return scene.objects()[index].color_a();
+		}
+
+
 	}
 
 
