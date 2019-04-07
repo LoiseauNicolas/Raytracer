@@ -75,7 +75,8 @@ public:
 
 		T curr_dist = std::numeric_limits<T>::max();
 		int index=-1, i=0;
-		sphere closest;
+		sphere closestSphere;
+		point_t<T> closestInter;
 
 
 
@@ -88,12 +89,12 @@ public:
 				if(distance(scene.observator(),contact) < curr_dist){
 					index = i;
 					curr_dist = distance(scene.observator(),contact);
-
+					closestInter = contact;
 				}
 			}
 			++i;
 		}
-		closest = scene.objects()[i];
+		closestSphere = scene.objects()[i];
 		// TODO retourner la couleur du fond si curr_dist == max
 		// Autrement retourner la couleur de l'objet:
 		// - Ajouter une couleur de fond dans l'objet scene : rgb entre 0-1
@@ -104,11 +105,13 @@ public:
 			// N = normal à la surface de l'objet closest au point P
 			// vector_t<T> V = vector_t<T>(scene.lights()[0].position(),
 				// closest.origin());
+			vector_t<T> lightVec = vector_t<T>(closestInter,
+				scene.lights()[0].position());
+			lightVec.normalize();
+
+			color_t<T> finalColor;
 
 			
-
-
-
 
 			return scene.objects()[index].color_a();
 		}
