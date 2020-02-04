@@ -69,6 +69,15 @@ public:
 		return *this;
 	}
 
+	// Vérifier les divisions par 0 ? utile ?
+	array_1x3& operator/=(const double &a)
+	{
+		_array[0] /= a;
+		_array[1] /= a;
+		_array[2] /= a;
+		return *this;
+	}
+
 	array_1x3& operator+=(const array_1x3 &a)
 	{
 		_array[0] += a[0];

@@ -1,14 +1,17 @@
 #pragma once
 
 #include "pixel.h"
+#include "color.h"
 
 class raytracer{
+
 public:
 
 	raytracer(){}
 
 	template<typename T>
 	void render(scene_t<T>& scene){
+		using color_t = color_u<T>;
 
 		const float delta = (2.0*scene.r()) / std::min(scene.height(),
 			scene.width());
@@ -26,7 +29,7 @@ public:
 				ray_t<T> ray = ray_t<T>(direction, scene.observator());
 
 				// TODO: Retourner une couleur ici
-				color_u<T> pixel_color = launch_ray(ray, scene);
+				color_t pixel_color = launch_ray(ray, scene);
 				// Utiliser la couleur retournee precedemment:
 				// La transformer de 0-1 vers 0-255
 				scene(i,j) = pixel_t(
@@ -71,6 +74,7 @@ public:
 	template<typename T>
 	static color_u<T> launch_ray(ray_t<T> & ray, scene_t<T>& scene){
 		using sphere = sphere_t<T>;
+		using color_t = color_u<T>;
 
 
 		T curr_dist = std::numeric_limits<T>::max();
@@ -109,7 +113,7 @@ public:
 				scene.lights()[0].position());
 			lightVec.normalize();
 
-			color_t<T> finalColor;
+			color_t finalColor;
 
 			
 
