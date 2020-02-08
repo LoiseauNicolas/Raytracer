@@ -120,56 +120,70 @@ public:
 
 			// screen_pt : point de l'image 
 			// Direction entre le point de l'image et la position de la luz
-			vector_t<T> direction = vector_t<T>(scene.lights()[0].position(),screen_pt);
+			// PA
+			vector_t<T> direction = vector_t<T>(closestInter,scene.lights()[0].position());
+			direction.normalize();
 			// rayon lumière (direction et position de la luz)
-			ray_t<T> rayLight = ray_t<T>(direction, scene.lights()[0].position());
+			ray_t<T> rayLight = ray_t<T>(direction, closestInter);
 
 			///
+			bool contactobject = false;
 			for(auto obj: scene.objects()){
 				point_t<T> contact_tolight;
 				// Intersect
 				if( obj.intersect(rayLight,contact_tolight) ){ 
-					if(distance(scene.lights()[0].position(),contact_tolight) < curr_dist_light){
+					contactobject = true;
+					break;
+					/*if(distance(scene.lights()[0].position(),contact_tolight) < curr_dist_light){
 						index_light = i_light;
 						curr_dist_light = distance(scene.lights()[0].position(),contact_tolight);
 						closestInter_tolight = contact_tolight;
-					}
+					}*/
 				}
 				++i_light;
 			}
 			closestSphere_tolight = scene.objects()[i_light];
 			// rayon entre la position de la lumière et le point touché
-			vector_t<T> lightVec = vector_t<T>(closestInter_tolight,
-				scene.lights()[0].position());
-			lightVec.normalize();
+			// vector_t<T> lightVec = vector_t<T>(closestInter_tolight,
+			// 	scene.lights()[0].position());
+			// lightVec.normalize();
+			double r = 0.5;
+			// (closestSphere_tolight.origin()).norm();
+
 
 
 			// vecteur centre sphere et 
-			vector_t<T> direction_centertopoint = vector_t<T>(closestSphere_tolight.origin(),closestInter_tolight);
-			ray_t<T> ray_centertopoint = ray_t<T>(direction_centertopoint, closestSphere_tolight.origin());
+			// vector_t<T> direction_centertopoint = vector_t<T>(closestSphere_tolight.origin(),closestInter_tolight);
+			// ray_t<T> ray_centertopoint = ray_t<T>(direction_centertopoint, closestSphere_tolight.origin());
 			// vector_t<T> _centertopoint = vector_t<T>(closestInter_tolight,
 				// scene.lights()[0].position());
 			// lightVec.normalize();
 			// closestInter_tolight
 
-			vector_t<T> vector_center = ray_centertopoint.direction();
-			vector_center.normalize();
+			// vector_t<T> vector_center = ray_centertopoint.direction();
+			// vector_center.normalize();
+			vector_t<T> _centertopoint = vector_t<T>(closestInter_tolight, scene.lights()[0].position());
+				// scene.lights()[0].position());
 
 			// lightVec.normalize();
 			// Calcul de l'angle de frappe du rayon
-			double angle = dot(lightVec,vector_center );
+			// (closestSphere_tolight.origin()).norm() 
+			double angle = dot(direction, _centertopoint);
 			// std::cout << angle << std::endl;
 
 
 
 			color_t finalColor = scene.objects()[index].color_a();
-			if(angle<0){
-				std::cout << angle << "  ";
-				return finalColor;
-			}else{
-				finalColor *= angle;
-				return finalColor;
-			}
+
+
+			// if(angle<0){
+			// 	std::cout << angle << "  ";
+			// 	// finale scene.light().luminosité * color_d (couleur diffuse (0 et 5)) * couleur couleur ambiante de l'objet * angle
+			// 	return finalColor;
+			// }else{
+			finalColor = finalColor * 0.5 * 1.0 * angle;
+			return finalColor;
+			// }
 
 		}
 
