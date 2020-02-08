@@ -20,5 +20,11 @@ public:
 
 	constexpr color_u(const array_1x3<T> &a):array_1x3<T>(a){}
 
+	// friend std::ostream& operator<<(std::ostream& os, const color_u<T> &col){
+ //  	os<<"Scene: "<<" W: "<<s._width<<" H: "<<s._height<<" _d: "<<s._d;
+	// 	os<<" Phi: "<<_phiR<<" Obs:"<<_observator_default<<std::endl;
+ //  	return os;
+ //  }
+
 
 };

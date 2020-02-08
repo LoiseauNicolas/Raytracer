@@ -16,6 +16,7 @@ public:
 		const float delta = (2.0*scene.r()) / std::min(scene.height(),
 			scene.width());
 
+
 		for(int i=0 ; i<scene.height() ; ++i){
 			for(int j=0; j<scene.width(); ++j){
 
@@ -29,7 +30,7 @@ public:
 				ray_t<T> ray = ray_t<T>(direction, scene.observator());
 
 				// TODO: Retourner une couleur ici
-				color_t pixel_color = launch_ray(ray, scene);
+				color_t pixel_color = launch_ray(ray, scene, screen_pt);
 				// Utiliser la couleur retournee precedemment:
 				// La transformer de 0-1 vers 0-255
 				scene(i,j) = pixel_t(
@@ -72,16 +73,19 @@ public:
 
 
 	template<typename T>
-	static color_u<T> launch_ray(ray_t<T> & ray, scene_t<T>& scene){
+	static color_u<T> launch_ray(ray_t<T> & ray, scene_t<T>& scene, point_t<T> screen_pt){
 		using sphere = sphere_t<T>;
 		using color_t = color_u<T>;
-
 
 		T curr_dist = std::numeric_limits<T>::max();
 		int index=-1, i=0;
 		sphere closestSphere;
 		point_t<T> closestInter;
 
+		T curr_dist_light = std::numeric_limits<T>::max();
+		int index_light=-1, i_light=0;
+		sphere closestSphere_tolight;
+		point_t<T> closestInter_tolight;
 
 
 		// TODO : Cours mignot ... vecteur prend le pas sur l'autre.
@@ -89,7 +93,7 @@ public:
 		for(auto obj: scene.objects()){
 			point_t<T> contact;
 			// Intersect
-			if( obj.intersect(ray,contact) ){
+			if( obj.intersect(ray,contact) ){ 
 				if(distance(scene.observator(),contact) < curr_dist){
 					index = i;
 					curr_dist = distance(scene.observator(),contact);
@@ -109,15 +113,61 @@ public:
 			// N = normal à la surface de l'objet closest au point P
 			// vector_t<T> V = vector_t<T>(scene.lights()[0].position(),
 				// closest.origin());
-			vector_t<T> lightVec = vector_t<T>(closestInter,
+
+
+
+
+
+			// screen_pt : point de l'image 
+			// Direction entre le point de l'image et la position de la luz
+			vector_t<T> direction = vector_t<T>(scene.lights()[0].position(),screen_pt);
+			// rayon lumière (direction et position de la luz)
+			ray_t<T> rayLight = ray_t<T>(direction, scene.lights()[0].position());
+
+			///
+			for(auto obj: scene.objects()){
+				point_t<T> contact_tolight;
+				// Intersect
+				if( obj.intersect(rayLight,contact_tolight) ){ 
+					if(distance(scene.lights()[0].position(),contact_tolight) < curr_dist_light){
+						index_light = i_light;
+						curr_dist_light = distance(scene.lights()[0].position(),contact_tolight);
+						closestInter_tolight = contact_tolight;
+					}
+				}
+				++i_light;
+			}
+			closestSphere_tolight = scene.objects()[i_light];
+			// rayon entre la position de la lumière et le point touché
+			vector_t<T> lightVec = vector_t<T>(closestInter_tolight,
 				scene.lights()[0].position());
 			lightVec.normalize();
 
-			color_t finalColor;
 
-			
+			// vecteur centre sphere et 
+			vector_t<T> direction_centertopoint = vector_t<T>(closestSphere_tolight.origin(),closestInter_tolight);
+			ray_t<T> ray_centertopoint = ray_t<T>(direction_centertopoint, closestSphere_tolight.origin());
+			// vector_t<T> _centertopoint = vector_t<T>(closestInter_tolight,
+				// scene.lights()[0].position());
+			// lightVec.normalize();
+			// closestInter_tolight
 
-			return scene.objects()[index].color_a();
+
+			// Calcul de l'angle de frappe du rayon
+			double angle = dot(lightVec,ray_centertopoint.direction());
+			std::cout << angle << std::endl;
+
+
+
+			color_t finalColor = scene.objects()[index].color_a();
+			if(angle<=0){
+				finalColor *= angle;
+				return finalColor;
+			}else{
+				
+				return finalColor;
+			}
+
 		}
 
 
