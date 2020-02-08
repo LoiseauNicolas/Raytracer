@@ -152,19 +152,22 @@ public:
 			// lightVec.normalize();
 			// closestInter_tolight
 
+			vector_t<T> vector_center = ray_centertopoint.direction();
+			vector_center.normalize();
 
+			// lightVec.normalize();
 			// Calcul de l'angle de frappe du rayon
-			double angle = dot(lightVec,ray_centertopoint.direction());
-			std::cout << angle << std::endl;
+			double angle = dot(lightVec,vector_center );
+			// std::cout << angle << std::endl;
 
 
 
 			color_t finalColor = scene.objects()[index].color_a();
-			if(angle<=0){
-				finalColor *= angle;
+			if(angle<0){
+				std::cout << angle << "  ";
 				return finalColor;
 			}else{
-				
+				finalColor *= angle;
 				return finalColor;
 			}
 
